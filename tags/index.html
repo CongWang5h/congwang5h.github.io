@@ -231,6 +231,7 @@
 
           </div>
           
+    <div class="comments" id="gitalk-container"></div>
 
 <script>
   window.addEventListener('tabs:register', () => {
@@ -282,6 +283,8 @@
 
       <div class="site-overview-wrap sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Cong Wang"
+      src="/images/avatar.jpg">
   <p class="site-author-name" itemprop="name">Cong Wang</p>
   <div class="site-description" itemprop="description"></div>
 </div>
@@ -406,6 +409,26 @@ if (document.querySelectorAll('pre.mermaid').length) {
   
 
   
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+<script>
+NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID    : '1d403bfe8d2337f0ba96',
+      clientSecret: '266a98bd28c160e1ed7e4aeb008a25726f1e464f',
+      repo        : 'congwang5h.github.io',
+      owner       : 'CongWang5h',
+      admin       : ['CongWang5h'],
+      id          : 'f47af1d1eda4d807b02bba32be15120b',
+        language: '',
+      distractionFreeMode: true
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+});
+</script>
 
 </body>
 </html>

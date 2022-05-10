@@ -29,8 +29,8 @@
 <meta property="og:site_name" content="紅">
 <meta property="og:description" content="NLP &amp;Transformer &amp; Bert Natural Language Processing with Attention Models Coursera # CS224n: Natural Language Processing with Deep Learning Stanford  Textbooks  Papers Generating synthetic te">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2022-05-09T21:51:14.166Z">
-<meta property="article:modified_time" content="2022-05-09T23:27:11.390Z">
+<meta property="article:published_time" content="2022-05-09T04:00:00.000Z">
+<meta property="article:modified_time" content="2022-05-10T19:28:18.470Z">
 <meta property="article:author" content="Cong Wang">
 <meta property="article:tag" content="Synthetic Data">
 <meta name="twitter:card" content="summary">
@@ -195,7 +195,7 @@
     <link itemprop="mainEntityOfPage" href="https://congwang5h.github.io/2022/05/09/Synthetic%20data%20documents/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="/images/avatar.jpg">
       <meta itemprop="name" content="Cong Wang">
       <meta itemprop="description" content="">
     </span>
@@ -214,10 +214,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
-              
 
-              <time title="Created: 2022-05-09 17:51:14 / Modified: 19:27:11" itemprop="dateCreated datePublished" datetime="2022-05-09T17:51:14-04:00">2022-05-09</time>
+              <time title="Created: 2022-05-09 00:00:00" itemprop="dateCreated datePublished" datetime="2022-05-09T00:00:00-04:00">2022-05-09</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2022-05-10 15:28:18" itemprop="dateModified" datetime="2022-05-10T15:28:18-04:00">2022-05-10</time>
+              </span>
 
           
 
@@ -255,10 +261,7 @@
 
         
     <div class="post-nav">
-      <div class="post-nav-item">
-    <a href="/2022/05/09/test/" rel="prev" title="Markdown test">
-      <i class="fa fa-chevron-left"></i> Markdown test
-    </a></div>
+      <div class="post-nav-item"></div>
       <div class="post-nav-item">
     <a href="/2022/05/09/Causal%20Inference%20documents/" rel="next" title="Causal Inference documents">
       Causal Inference documents <i class="fa fa-chevron-right"></i>
@@ -275,6 +278,7 @@
 
           </div>
           
+    <div class="comments" id="gitalk-container"></div>
 
 <script>
   window.addEventListener('tabs:register', () => {
@@ -327,6 +331,8 @@
 
       <div class="site-overview-wrap sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Cong Wang"
+      src="/images/avatar.jpg">
   <p class="site-author-name" itemprop="name">Cong Wang</p>
   <div class="site-description" itemprop="description"></div>
 </div>
@@ -451,6 +457,26 @@ if (document.querySelectorAll('pre.mermaid').length) {
   
 
   
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+<script>
+NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID    : '1d403bfe8d2337f0ba96',
+      clientSecret: '266a98bd28c160e1ed7e4aeb008a25726f1e464f',
+      repo        : 'congwang5h.github.io',
+      owner       : 'CongWang5h',
+      admin       : ['CongWang5h'],
+      id          : '06dbe69d300801f20c8c1a642f7153bc',
+        language: '',
+      distractionFreeMode: true
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+});
+</script>
 
 </body>
 </html>
