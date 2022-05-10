@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.1.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"congwang5h.github.io","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":"mac"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="based on CAUSAL INFERENCE IN STATISTICS: A PRIMER JUDEA PEARL, MADELYN GLYMOUR, NICHOLAS P. JEWELL Note copied from 饺子博士and饭老师 video link : https:&#x2F;&#x2F;www.bilibili.com&#x2F;video&#x2F;BV15J411L7xW&#x2F; This note is no">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Causal Inference 0 Introduction">
+<meta property="og:url" content="https://congwang5h.github.io/2022/05/10/Causal%20Inference%200%20Introduction/index.html">
+<meta property="og:site_name" content="紅">
+<meta property="og:description" content="based on CAUSAL INFERENCE IN STATISTICS: A PRIMER JUDEA PEARL, MADELYN GLYMOUR, NICHOLAS P. JEWELL Note copied from 饺子博士and饭老师 video link : https:&#x2F;&#x2F;www.bilibili.com&#x2F;video&#x2F;BV15J411L7xW&#x2F; This note is no">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://congwang5h.github.io/2022/05/10/Causal%20Inference%200%20Introduction/01.png">
+<meta property="og:image" content="https://congwang5h.github.io/2022/05/10/Causal%20Inference%200%20Introduction/02.png">
+<meta property="article:published_time" content="2022-05-10T22:36:10.286Z">
+<meta property="article:modified_time" content="2022-05-10T22:45:09.950Z">
+<meta property="article:author" content="Cong Wang">
+<meta property="article:tag" content="Causal Inference">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://congwang5h.github.io/2022/05/10/Causal%20Inference%200%20Introduction/01.png">
+
+<link rel="canonical" href="https://congwang5h.github.io/2022/05/10/Causal%20Inference%200%20Introduction/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>Causal Inference 0 Introduction | 紅</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">紅</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Cong's blog</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://congwang5h.github.io/2022/05/10/Causal%20Inference%200%20Introduction/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Cong Wang">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="紅">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Causal Inference 0 Introduction
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2022-05-10 18:36:10 / Modified: 18:45:09" itemprop="dateCreated datePublished" datetime="2022-05-10T18:36:10-04:00">2022-05-10</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>based on <a target="_blank" rel="noopener" href="http://bayes.cs.ucla.edu/PRIMER/">CAUSAL INFERENCE IN STATISTICS: A PRIMER</a> JUDEA PEARL, MADELYN GLYMOUR, NICHOLAS P. JEWELL</p>
+<p>Note copied from <a target="_blank" rel="noopener" href="https://space.bilibili.com/491707363">饺子博士and饭老师</a></p>
+<p>video link : <a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV15J411L7xW/">https://www.bilibili.com/video/BV15J411L7xW/</a></p>
+<p>This note is not complete, but only for personal study and website testing.</p>
+<span id="more"></span>
+<h2 id="simpsons-paradox"><a class="markdownIt-Anchor" href="#simpsons-paradox"></a> Simpson’s paradox</h2>
+<h3 id="ex-uc-berkeley-gender-bias"><a class="markdownIt-Anchor" href="#ex-uc-berkeley-gender-bias"></a> Ex: UC Berkeley gender bias</h3>
+<p>Graduate admissions to UC Berkeley (Fall 1973)</p>
+<h3 id="ex-cholesterol-and-exercise"><a class="markdownIt-Anchor" href="#ex-cholesterol-and-exercise"></a> Ex: Cholesterol and Exercise</h3>
+<p><img src="01.png" alt="Pasted image 20220510172154.png" /></p>
+<p><img src="02.png" alt="Pasted image 20220510172230.png" /></p>
+<h4 id="explanation"><a class="markdownIt-Anchor" href="#explanation"></a> Explanation</h4>
+<p>Age is an common cause of both exercise and cholesterol.</p>
+<pre class="mermaid">graph LR;
+	A[Age];
+	A --> B[Exercise];
+	A --> C[Cholesterol];
+	B --> C</pre>
+<p>Older people, who are more likely to exercise, are also more likely to have cholesterol regardless of excercise</p>
+<h3 id="treatment-effect"><a class="markdownIt-Anchor" href="#treatment-effect"></a> Treatment Effect</h3>
+<h4 id="subpopulation-data"><a class="markdownIt-Anchor" href="#subpopulation-data"></a> subpopulation data</h4>
+<p>Men</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th style="text-align:center">Not Recovered</th>
+<th style="text-align:center">Recovered</th>
+<th style="text-align:center">Total</th>
+<th style="text-align:center">Pr(Recovered)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Trt(1)</td>
+<td style="text-align:center">6</td>
+<td style="text-align:center">81</td>
+<td style="text-align:center">87</td>
+<td style="text-align:center">81/87 = 0.93</td>
+</tr>
+<tr>
+<td>No Trt(2)</td>
+<td style="text-align:center">36</td>
+<td style="text-align:center">234</td>
+<td style="text-align:center">270</td>
+<td style="text-align:center">234/270 = 0.87</td>
+</tr>
+</tbody>
+</table>
+<p>We have <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>P</mi><mo stretchy="false">(</mo><mi>R</mi><mi>e</mi><mi>c</mi><mi>o</mi><mi>v</mi><mi>e</mi><mi>r</mi><mi>e</mi><mi>d</mi><mo separator="true">,</mo><mi>T</mi><mi>r</mi><mi>t</mi><mo stretchy="false">)</mo><mo>&gt;</mo><mi>P</mi><mo stretchy="false">(</mo><mi>R</mi><mi>e</mi><mi>c</mi><mi>o</mi><mi>v</mi><mi>e</mi><mi>r</mi><mi>e</mi><mi>d</mi><mo separator="true">,</mo><mi>n</mi><mi>o</mi><mi>T</mi><mi>r</mi><mi>t</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">P(Recovered, Trt) &gt; P(Recovered, no Trt)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.13889em;">P</span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.00773em;">R</span><span class="mord mathdefault">e</span><span class="mord mathdefault">c</span><span class="mord mathdefault">o</span><span class="mord mathdefault" style="margin-right:0.03588em;">v</span><span class="mord mathdefault">e</span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span><span class="mord mathdefault">e</span><span class="mord mathdefault">d</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault" style="margin-right:0.13889em;">T</span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span><span class="mord mathdefault">t</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">&gt;</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.13889em;">P</span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.00773em;">R</span><span class="mord mathdefault">e</span><span class="mord mathdefault">c</span><span class="mord mathdefault">o</span><span class="mord mathdefault" style="margin-right:0.03588em;">v</span><span class="mord mathdefault">e</span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span><span class="mord mathdefault">e</span><span class="mord mathdefault">d</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault">n</span><span class="mord mathdefault">o</span><span class="mord mathdefault" style="margin-right:0.13889em;">T</span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span><span class="mord mathdefault">t</span><span class="mclose">)</span></span></span></span></p>
+<p>Women</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th style="text-align:center">Not Recovered</th>
+<th style="text-align:center">Recovered</th>
+<th style="text-align:center">Total</th>
+<th style="text-align:center">Pr(Recovered)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Trt(3)</td>
+<td style="text-align:center">71</td>
+<td style="text-align:center">192</td>
+<td style="text-align:center">263</td>
+<td style="text-align:center">192/263 = 0.73</td>
+</tr>
+<tr>
+<td>No Trt(4)</td>
+<td style="text-align:center">25</td>
+<td style="text-align:center">55</td>
+<td style="text-align:center">80</td>
+<td style="text-align:center">55/80 = 0.69</td>
+</tr>
+</tbody>
+</table>
+<p>We have also <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>P</mi><mo stretchy="false">(</mo><mi>R</mi><mi>e</mi><mi>c</mi><mi>o</mi><mi>v</mi><mi>e</mi><mi>r</mi><mi>e</mi><mi>d</mi><mo separator="true">,</mo><mi>T</mi><mi>r</mi><mi>t</mi><mo stretchy="false">)</mo><mo>&gt;</mo><mi>P</mi><mo stretchy="false">(</mo><mi>R</mi><mi>e</mi><mi>c</mi><mi>o</mi><mi>v</mi><mi>e</mi><mi>r</mi><mi>e</mi><mi>d</mi><mo separator="true">,</mo><mi>n</mi><mi>o</mi><mi>T</mi><mi>r</mi><mi>t</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">P(Recovered, Trt) &gt; P(Recovered, no Trt)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.13889em;">P</span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.00773em;">R</span><span class="mord mathdefault">e</span><span class="mord mathdefault">c</span><span class="mord mathdefault">o</span><span class="mord mathdefault" style="margin-right:0.03588em;">v</span><span class="mord mathdefault">e</span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span><span class="mord mathdefault">e</span><span class="mord mathdefault">d</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault" style="margin-right:0.13889em;">T</span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span><span class="mord mathdefault">t</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">&gt;</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.13889em;">P</span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.00773em;">R</span><span class="mord mathdefault">e</span><span class="mord mathdefault">c</span><span class="mord mathdefault">o</span><span class="mord mathdefault" style="margin-right:0.03588em;">v</span><span class="mord mathdefault">e</span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span><span class="mord mathdefault">e</span><span class="mord mathdefault">d</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault">n</span><span class="mord mathdefault">o</span><span class="mord mathdefault" style="margin-right:0.13889em;">T</span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span><span class="mord mathdefault">t</span><span class="mclose">)</span></span></span></span></p>
+<h4 id="population-data"><a class="markdownIt-Anchor" href="#population-data"></a> population data</h4>
+<table>
+<thead>
+<tr>
+<th></th>
+<th style="text-align:center">Not Recovered</th>
+<th style="text-align:center">Recovered</th>
+<th style="text-align:center">Total</th>
+<th style="text-align:center">Pr(Recovered)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Trt(A)</td>
+<td style="text-align:center">77</td>
+<td style="text-align:center">273</td>
+<td style="text-align:center">350</td>
+<td style="text-align:center">273/350 = 0.78</td>
+</tr>
+<tr>
+<td>No Trt(B)</td>
+<td style="text-align:center">61</td>
+<td style="text-align:center">289</td>
+<td style="text-align:center">350</td>
+<td style="text-align:center">289/350 = 0.83</td>
+</tr>
+</tbody>
+</table>
+<p>We have also <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>P</mi><mo stretchy="false">(</mo><mi>R</mi><mi>e</mi><mi>c</mi><mi>o</mi><mi>v</mi><mi>e</mi><mi>r</mi><mi>e</mi><mi>d</mi><mo separator="true">,</mo><mi>T</mi><mi>r</mi><mi>t</mi><mo stretchy="false">)</mo><mo>&lt;</mo><mi>P</mi><mo stretchy="false">(</mo><mi>R</mi><mi>e</mi><mi>c</mi><mi>o</mi><mi>v</mi><mi>e</mi><mi>r</mi><mi>e</mi><mi>d</mi><mo separator="true">,</mo><mi>n</mi><mi>o</mi><mi>T</mi><mi>r</mi><mi>t</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">P(Recovered, Trt) &lt; P(Recovered, no Trt)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.13889em;">P</span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.00773em;">R</span><span class="mord mathdefault">e</span><span class="mord mathdefault">c</span><span class="mord mathdefault">o</span><span class="mord mathdefault" style="margin-right:0.03588em;">v</span><span class="mord mathdefault">e</span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span><span class="mord mathdefault">e</span><span class="mord mathdefault">d</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault" style="margin-right:0.13889em;">T</span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span><span class="mord mathdefault">t</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">&lt;</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.13889em;">P</span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.00773em;">R</span><span class="mord mathdefault">e</span><span class="mord mathdefault">c</span><span class="mord mathdefault">o</span><span class="mord mathdefault" style="margin-right:0.03588em;">v</span><span class="mord mathdefault">e</span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span><span class="mord mathdefault">e</span><span class="mord mathdefault">d</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault">n</span><span class="mord mathdefault">o</span><span class="mord mathdefault" style="margin-right:0.13889em;">T</span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span><span class="mord mathdefault">t</span><span class="mclose">)</span></span></span></span></p>
+<h4 id="explanation-2"><a class="markdownIt-Anchor" href="#explanation-2"></a> Explanation</h4>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>X</th>
+<th>Y</th>
+<th>Z</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>Women</td>
+<td>Not Recovered</td>
+<td>No Trt</td>
+</tr>
+<tr>
+<td>1</td>
+<td>Men</td>
+<td>Recovered</td>
+<td>Trt</td>
+</tr>
+</tbody>
+</table>
+<p class='katex-block katex-error' title='ParseError: KaTeX parse error: No such environment: align* at position 7: \begin{̲a̲l̲i̲g̲n̲*̲}̲
+P(Y=1|Z=1) =&amp; …'>\begin{align*}
+P(Y=1|Z=1) =&amp; P(Y=1|Z=1, X=1)P(X=1|Z=1) + P(Y=1|Z=1, X=0)P(X=0|Z=1)\\
+P(Y=1|Z=0) =&amp; P(Y=1|Z=0, X=1)P(X=1|Z=0) + P(Y=1|Z=0, X=0)P(X=0|Z=0)\\
+A =&amp; (1)\cdot q+ (3) \cdot (1-q)\\
+B =&amp; (2)\cdot q&#039;+ (4) \cdot (1-q&#039;)\\
+\end{align*}
+</p>
+<p>Convex combination</p>
+<p>The reason that</p>
+<p class='katex-block'><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>A</mi><mo>&lt;</mo><mi>B</mi></mrow><annotation encoding="application/x-tex">A &lt; B
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.72243em;vertical-align:-0.0391em;"></span><span class="mord mathdefault">A</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">&lt;</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.05017em;">B</span></span></span></span></span></p>
+<p>is that large <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>1</mn><mo>−</mo><mi>q</mi></mrow><annotation encoding="application/x-tex">1-q</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.72777em;vertical-align:-0.08333em;"></span><span class="mord">1</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.625em;vertical-align:-0.19444em;"></span><span class="mord mathdefault" style="margin-right:0.03588em;">q</span></span></span></span> pull the value of <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>A</mi></mrow><annotation encoding="application/x-tex">A</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault">A</span></span></span></span> towards <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo stretchy="false">(</mo><mn>3</mn><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(3)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord">3</span><span class="mclose">)</span></span></span></span>, which is much smaller than <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo stretchy="false">(</mo><mn>1</mn><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(1)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord">1</span><span class="mclose">)</span></span></span></span>, resulting a small value of <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>A</mi></mrow><annotation encoding="application/x-tex">A</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault">A</span></span></span></span>.</p>
+<blockquote>
+<p><mark>Statement A</mark><br />
+<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>1</mn><mo>−</mo><mi>q</mi><mo>=</mo><mi>P</mi><mo stretchy="false">(</mo><mi>X</mi><mo>=</mo><mn>0</mn><mi mathvariant="normal">∣</mi><mi>Z</mi><mo>=</mo><mn>1</mn><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">1-q =P(X=0| Z=1)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.72777em;vertical-align:-0.08333em;"></span><span class="mord">1</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.625em;vertical-align:-0.19444em;"></span><span class="mord mathdefault" style="margin-right:0.03588em;">q</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.13889em;">P</span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.07847em;">X</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">0</span><span class="mord">∣</span><span class="mord mathdefault" style="margin-right:0.07153em;">Z</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">1</span><span class="mclose">)</span></span></span></span> is large <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mtext>  </mtext><mo>⟹</mo><mtext>  </mtext></mrow><annotation encoding="application/x-tex">\implies</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.549em;vertical-align:-0.024em;"></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">⟹</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span></span></span> Drug users are more likely to be women.</p>
+</blockquote>
+<blockquote>
+<p><mark>Statement B</mark><br />
+<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo stretchy="false">(</mo><mn>3</mn><mo stretchy="false">)</mo><mo>&lt;</mo><mo stretchy="false">(</mo><mn>1</mn><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(3) &lt; (1)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord">3</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">&lt;</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord">1</span><span class="mclose">)</span></span></span></span>  <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mtext>  </mtext><mo>⟹</mo><mtext>  </mtext></mrow><annotation encoding="application/x-tex">\implies</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.549em;vertical-align:-0.024em;"></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">⟹</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span></span></span> Women drug users are less likely to recover than men drug users .</p>
+</blockquote>
+<p>If we randomly select a drug user in popultation, it is more likely to be women, which is more difficult to get recovered, thus it appears this person is more difficult to recover even whith treatment.</p>
+<pre class="mermaid">graph LR;
+	A[Sex];
+	A --> B[Trt];
+	A --> C[Recovered];
+	B --> C</pre>
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/Causal-Inference/" rel="tag"><i class="fa fa-tag"></i> Causal Inference</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2022/05/09/test/" rel="prev" title="Markdown test">
+      <i class="fa fa-chevron-left"></i> Markdown test
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="gitalk-container"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#simpsons-paradox"><span class="nav-number">1.</span> <span class="nav-text"> Simpson’s paradox</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#ex-uc-berkeley-gender-bias"><span class="nav-number">1.1.</span> <span class="nav-text"> Ex: UC Berkeley gender bias</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ex-cholesterol-and-exercise"><span class="nav-number">1.2.</span> <span class="nav-text"> Ex: Cholesterol and Exercise</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#explanation"><span class="nav-number">1.2.1.</span> <span class="nav-text"> Explanation</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#treatment-effect"><span class="nav-number">1.3.</span> <span class="nav-text"> Treatment Effect</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#subpopulation-data"><span class="nav-number">1.3.1.</span> <span class="nav-text"> subpopulation data</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#population-data"><span class="nav-number">1.3.2.</span> <span class="nav-text"> population data</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#explanation-2"><span class="nav-number">1.3.3.</span> <span class="nav-text"> Explanation</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Cong Wang"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">Cong Wang</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">4</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Cong Wang</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+<script>
+if (document.querySelectorAll('pre.mermaid').length) {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mermaid@8/dist/mermaid.min.js', () => {
+    mermaid.initialize({
+      theme    : 'neutral',
+      logLevel : 3,
+      flowchart: { curve     : 'linear' },
+      gantt    : { axisFormat: '%m/%d/%Y' },
+      sequence : { actorMargin: 50 }
+    });
+  }, window.mermaid);
+}
+</script>
+
+
+  
+
+  
+
+  
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+<script>
+NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID    : '1d403bfe8d2337f0ba96',
+      clientSecret: '266a98bd28c160e1ed7e4aeb008a25726f1e464f',
+      repo        : 'congwang5h.github.io',
+      owner       : 'CongWang5h',
+      admin       : ['CongWang5h'],
+      id          : 'ac7498a20dacc0d63e07f3cae1a978b5',
+        language: 'en',
+      distractionFreeMode: true
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+});
+</script>
+
+</body>
+</html>
