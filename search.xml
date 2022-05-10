@@ -12,8 +12,8 @@
 <h3 id="ex-uc-berkeley-gender-bias"><a class="markdownIt-Anchor" href="#ex-uc-berkeley-gender-bias"></a> Ex: UC Berkeley gender bias</h3>
 <p>Graduate admissions to UC Berkeley (Fall 1973)</p>
 <h3 id="ex-cholesterol-and-exercise"><a class="markdownIt-Anchor" href="#ex-cholesterol-and-exercise"></a> Ex: Cholesterol and Exercise</h3>
-<p><img src="imgs/01.png" alt="01"></p>
-<p><img src="imgs/02.png" alt="02"></p>
+<p><img src="/imgs/01.png" alt="01"></p>
+<p><img src="/imgs/02.png" alt="02"></p>
 <h4 id="explanation"><a class="markdownIt-Anchor" href="#explanation"></a> Explanation</h4>
 <p>Age is an common cause of both exercise and cholesterol.</p>
 <pre class="mermaid">graph LR;
@@ -158,6 +158,19 @@ P(Y=1|Z=1) =& …"><mjx-container class="MathJax" jax="SVG" display="true"><svg 
 	A --&gt; B[Trt];
 	A --&gt; C[Recovered];
 	B --&gt; C</pre>]]></content>
+      <tags>
+        <tag>Causal Inference</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Causal Inference documents</title>
+    <url>/2022/05/09/Causal%20Inference%20documents/</url>
+    <content><![CDATA[<h2 id="course-and-textbooks"><a class="markdownIt-Anchor" href="#course-and-textbooks"></a> Course and Textbooks</h2>
+<p><a href="https://www.bradyneal.com/causal-inference-course">Introduction to Causal Inference</a> Brady Neal</p>
+<p><a href="http://bayes.cs.ucla.edu/PRIMER/">CAUSAL INFERENCE IN STATISTICS: A PRIMER</a> JUDEA PEARL, MADELYN GLYMOUR, NICHOLAS P. JEWELL</p>
+<h2 id="papers"><a class="markdownIt-Anchor" href="#papers"></a> Papers</h2>
+<p><a href="https://arxiv.org/pdf/2102.05638.pdf">Generating synthetic text data to evaluate causal inference methods[J]. arXiv preprint arXiv:2102.05638, 2021.</a> Wood-Doughty Z, Shpitser I, Dredze M.</p>
+]]></content>
       <tags>
         <tag>Causal Inference</tag>
       </tags>
@@ -411,19 +424,6 @@ with lazy continuation.</p>
       <tags>
         <tag>markdown</tag>
         <tag>test</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Causal Inference documents</title>
-    <url>/2022/05/09/Causal%20Inference%20documents/</url>
-    <content><![CDATA[<h2 id="course-and-textbooks"><a class="markdownIt-Anchor" href="#course-and-textbooks"></a> Course and Textbooks</h2>
-<p><a href="https://www.bradyneal.com/causal-inference-course">Introduction to Causal Inference</a> Brady Neal</p>
-<p><a href="http://bayes.cs.ucla.edu/PRIMER/">CAUSAL INFERENCE IN STATISTICS: A PRIMER</a> JUDEA PEARL, MADELYN GLYMOUR, NICHOLAS P. JEWELL</p>
-<h2 id="papers"><a class="markdownIt-Anchor" href="#papers"></a> Papers</h2>
-<p><a href="https://arxiv.org/pdf/2102.05638.pdf">Generating synthetic text data to evaluate causal inference methods[J]. arXiv preprint arXiv:2102.05638, 2021.</a> Wood-Doughty Z, Shpitser I, Dredze M.</p>
-]]></content>
-      <tags>
-        <tag>Causal Inference</tag>
       </tags>
   </entry>
 </search>
