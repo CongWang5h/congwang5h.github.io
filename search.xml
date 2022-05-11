@@ -366,20 +366,6 @@ if <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mover 
       </tags>
   </entry>
   <entry>
-    <title>Synthetic Data Documents</title>
-    <url>/2022/05/09/Synthetic%20data%20documents/</url>
-    <content><![CDATA[<h2 id="nlp-transformer-bert"><a class="markdownIt-Anchor" href="#nlp-transformer-bert"></a> NLP &amp;Transformer &amp; Bert</h2>
-<p><a href="https://www.coursera.org/learn/attention-models-in-nlp/home/welcome">Natural Language Processing with Attention Models</a> Coursera</p>
-<p><a href="https://web.stanford.edu/class/cs224n/"># CS224n: Natural Language Processing with Deep Learning</a> Stanford</p>
-<h2 id="textbooks"><a class="markdownIt-Anchor" href="#textbooks"></a> Textbooks</h2>
-<h2 id="papers"><a class="markdownIt-Anchor" href="#papers"></a> Papers</h2>
-<p><a href="https://arxiv.org/pdf/2102.05638.pdf">Generating synthetic text data to evaluate causal inference methods[J]. arXiv preprint arXiv:2102.05638, 2021.</a> Wood-Doughty Z, Shpitser I, Dredze M.</p>
-]]></content>
-      <tags>
-        <tag>Synthetic Data</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Markdown test</title>
     <url>/2022/05/09/test/</url>
     <content><![CDATA[<p>A markdown format test page, based on <a href="https://markdown-it.github.io">markdown-it</a> test page.</p>
@@ -614,6 +600,20 @@ with lazy continuation.</p>
       <tags>
         <tag>markdown</tag>
         <tag>test</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Synthetic Data Documents</title>
+    <url>/2022/05/09/Synthetic%20data%20documents/</url>
+    <content><![CDATA[<h2 id="nlp-transformer-bert"><a class="markdownIt-Anchor" href="#nlp-transformer-bert"></a> NLP &amp;Transformer &amp; Bert</h2>
+<p><a href="https://www.coursera.org/learn/attention-models-in-nlp/home/welcome">Natural Language Processing with Attention Models</a> Coursera</p>
+<p><a href="https://web.stanford.edu/class/cs224n/"># CS224n: Natural Language Processing with Deep Learning</a> Stanford</p>
+<h2 id="textbooks"><a class="markdownIt-Anchor" href="#textbooks"></a> Textbooks</h2>
+<h2 id="papers"><a class="markdownIt-Anchor" href="#papers"></a> Papers</h2>
+<p><a href="https://arxiv.org/pdf/2102.05638.pdf">Generating synthetic text data to evaluate causal inference methods[J]. arXiv preprint arXiv:2102.05638, 2021.</a> Wood-Doughty Z, Shpitser I, Dredze M.</p>
+]]></content>
+      <tags>
+        <tag>Synthetic Data</tag>
       </tags>
   </entry>
 </search>
